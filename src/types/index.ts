@@ -17,12 +17,12 @@ export interface ICity {
 }
 export type TypeCities = ICity[]
 export interface ITitleKey {
-    birthday: { title: string };
-    address: { title: string };
-    mobilePhone: { title: string };
-    gender: { title: string; value: { Female: string; Male: string } };
-    additional: { title: string; multiline: boolean };
-    name: { title: string };
-    cityId: { title: string };
-    isActive: { title: string; value: (ev: boolean) => (string) }
+    birthday: { select?: boolean; title: string; type: string; placeholder?: string };
+    address: { select?: boolean; title: string; type: string; placeholder?: string  };
+    mobilePhone: { select?: boolean; title: string; type: string; placeholder?: string   };
+    gender: { select: boolean; title: string; value: { Female: string; Male: string }; type: string; placeholder?: string  };
+    additional: { select?: boolean; type: string; title: string; placeholder?: string  };
+    name: { select?: boolean; title: string; type: string; placeholder?: string   };
+    cityId: { select: boolean; title: string; type: string; placeholder?: string   };
+    isActive: { select: boolean; title: string; value: (ev: boolean) => string; type: string; placeholder?: string   }
 }

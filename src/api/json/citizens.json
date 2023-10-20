@@ -2,7 +2,7 @@
   {
     "name": "Rick Sanchez",
     "id": 0,
-    "birthday": "1952-11-11T00:00:00Z",
+    "birthday": "1952-11-11",
     "cityId": 1,
     "address": "Дружбы ул., д. 22 кв.4",
     "mobilePhone": "+7 923-680-7635",
@@ -14,7 +14,7 @@
   {
     "name": "Morty Smith",
     "id": 1,
-    "birthday": "2002-09-19T00:00:00Z",
+    "birthday": "2002-09-19",
     "cityId": 1,
     "address": "Дружбы ул., д. 22 кв.4",
     "mobilePhone": "+7 967-638-5455",
@@ -26,7 +26,7 @@
   {
     "name": "Summer Smith",
     "id": 3,
-    "birthday": "1999-11-23T00:00:00Z",
+    "birthday": "1999-11-23",
     "cityId": 1,
     "address": "Минская ул., д. 25 кв.52",
     "mobilePhone": "+7 910-487-1070",
@@ -38,7 +38,7 @@
   {
     "name": "Beth Smith",
     "id": 4,
-    "birthday": "1982-11-19T00:00:00Z",
+    "birthday": "1982-11-19",
     "cityId": 1,
     "address": "Минская ул., д. 25 кв.52",
     "mobilePhone": "+7 948-368-2572",
@@ -50,7 +50,7 @@
   {
     "name": "Jerry Smith",
     "id": 5,
-    "birthday": "1982-04-20T00:00:00Z",
+    "birthday": "1982-04-20",
     "cityId": 1,
     "address": "Минская ул., д. 25 кв.52",
     "mobilePhone": "+7 935-318-6399",
@@ -62,7 +62,7 @@
   {
     "name": "Abadango Cluster Princess",
     "id": 6,
-    "birthday": "1234-05-06T00:00:00Z",
+    "birthday": "1234-05-06",
     "cityId": 2,
     "address": "Полевая ул., д. 13 кв.108",
     "mobilePhone": "+7 916-424-8194",
@@ -74,7 +74,7 @@
   {
     "name": "Abradolf Lincler",
     "id": 7,
-    "birthday": "1798-02-05T00:00:00Z",
+    "birthday": "1798-02-05",
     "cityId": 2,
     "address": "",
     "mobilePhone": "+7 983-330-7115",
@@ -86,7 +86,7 @@
   {
     "name": "Adjudicator Rick",
     "id": 8,
-    "birthday": "3567-11-15T00:00:00Z",
+    "birthday": "3567-11-15",
     "cityId": 3,
     "address": "Приозерная ул., д. 25 кв.17",
     "mobilePhone": "+7 972-571-3245",
@@ -98,7 +98,7 @@
   {
     "name": "Agency Director",
     "id": 9,
-    "birthday": "2658-06-23T00:00:00Z",
+    "birthday": "2658-06-23",
     "cityId": 4,
     "address": "Космонавтов ул., д. 1 кв.219",
     "mobilePhone": "+7 930-692-1234",
@@ -110,7 +110,7 @@
   {
     "name": "Alan Rails",
     "id": 10,
-    "birthday": "2456-07-14T00:00:00Z",
+    "birthday": "2456-07-14",
     "cityId": 5,
     "address": "Центральная ул., д. 16 кв.65",
     "mobilePhone": "+7 985-438-4640",
@@ -122,7 +122,7 @@
   {
     "name": "Albert Einstein",
     "id": 11,
-    "birthday": "2238-05-11T00:00:00Z",
+    "birthday": "2238-05-11",
     "cityId": 6,
     "address": "Дружбы ул., д. 1 кв.171",
     "mobilePhone": "+7 955-298-9951",
@@ -134,7 +134,7 @@
   {
     "name": "Alexander",
     "id": 12,
-    "birthday": "1989-06-07T00:00:00Z",
+    "birthday": "1989-06-07",
     "cityId": 7,
     "address": "Полевая ул., д. 10 кв.159",
     "mobilePhone": "+7 929-736-8330",
@@ -146,7 +146,7 @@
   {
     "name": "Alien Googah",
     "id": 13,
-    "birthday": "2005-07-08T00:00:00Z",
+    "birthday": "2005-07-08",
     "cityId": 8,
     "address": "",
     "mobilePhone": "+7 968-694-2823",
@@ -158,7 +158,7 @@
   {
     "name": "Alien Morty",
     "id": 14,
-    "birthday": "2002-09-19T00:00:00Z",
+    "birthday": "2002-09-19",
     "cityId": 8,
     "address": "Победы ул., д. 3 кв.210",
     "mobilePhone": "+7 956-124-2111",
@@ -170,7 +170,7 @@
   {
     "name": "Alien Rick",
     "id": 15,
-    "birthday": "1952-11-11T00:00:00Z",
+    "birthday": "1952-11-11",
     "cityId": 1,
     "address": "Озерный пер., д. 7 кв.129",
     "mobilePhone": "+7 933-290-2328",
@@ -182,7 +182,7 @@
   {
     "name": "Amish Cyborg",
     "id": 16,
-    "birthday": "2625-07-07T00:00:00Z",
+    "birthday": "2625-07-07",
     "cityId": 9,
     "address": "Приозерная ул., д. 14 кв.36",
     "mobilePhone": "+7 948-821-2411",
@@ -194,7 +194,7 @@
   {
     "name": "Annie",
     "id": 17,
-    "birthday": "2005-02-07T00:00:00Z",
+    "birthday": "2005-02-07",
     "cityId":10,
     "address": "Березовая ул., д. 7 кв.184",
     "mobilePhone": "+7 966-827-4085",
@@ -206,7 +206,7 @@
   {
     "name": "Antenna Morty",
     "id": 18,
-    "birthday": "2002-09-19T00:00:00Z",
+    "birthday": "2002-09-19",
     "cityId": 1,
     "address": "Колхозная ул., д. 22 кв.173",
     "mobilePhone": "+7 963-555-9672",
@@ -218,7 +218,7 @@
   {
     "name": "Ants in my Eyes Johnson",
     "id": 19,
-    "birthday": "2136-04-09T00:00:00Z",
+    "birthday": "2136-04-09",
     "cityId": 11,
     "address": "Лесная ул., д. 10 кв.67",
     "mobilePhone": "+7 984-616-9045",
@@ -230,7 +230,7 @@
   {
     "name": "Aqua Morty",
     "id": 20,
-    "birthday": "2002-09-19T00:00:00Z",
+    "birthday": "2002-09-19",
     "cityId": 21,
     "address": "Сосновая ул., д. 16 кв.165",
     "mobilePhone": "+7 911-741-4647",
