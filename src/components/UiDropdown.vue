@@ -1,76 +1,82 @@
 <template>
-  <div
-    class='dropdown'
-    :class="{'dropdown_opened': isOpen}"
-    @click='isOpen = !isOpen'
-  >
-    <button
-      type='button'
-      class='dropdown__toggle'
-    >
-      <span>{{ optionActive }}</span>
-    </button>
     <div
-      class='dropdown__menu'
-      role='listbox'
-      v-show='isOpen'
+        class='dropdown'
+        :class="{'dropdown_opened': isOpen}"
+        @click='isOpen = !isOpen'
     >
-      <button
-        class='dropdown__item'
-        role='option'
-        type='button'
-        v-for='option in options'
-        @click="$emit('update:modelValue', option)"
-      >
-        {{ option }}
-      </button>
+        <button
+            type='button'
+            class='dropdown__toggle'
+        >
+            <span>{{ optionActive }}</span>
+        </button>
+        <div
+            class='dropdown__menu'
+            role='listbox'
+            v-show='isOpen'
+        >
+            <button
+                class='dropdown__item'
+                role='option'
+                type='button'
+                v-for='option in options'
+                @click="$emit('update:modelValue', option)"
+            >
+                {{ option }}
+            </button>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 
 export default {
-  name: 'UiDropdown',
-  props: {
-    options: {
-      required: true,
-      type: Array,
+    name: 'UiDropdown',
+    props: {
+        options: {
+            required: true,
+            type: Array,
+        },
+        modelValue: {
+            type: String,
+        },
     },
-    modelValue: {
-      type: String,
+    emits: ['update:modelValue'],
+    data() {
+        return {
+            isOpen: false,
+        };
     },
-  },
-  emits: ['update:modelValue'],
-  data() {
-    return {
-      isOpen: false,
-    };
-  },
-  computed: {
+    computed: {
 
-    optionActive() {
-      if (this.options.map(option => option).includes(this.modelValue)) {
-        return this.options.find(option => option === this.modelValue);
-      } else {
-        return this.title;
-      }
+        optionActive() {
+            if (this.options.map(option => option).includes(this.modelValue)) {
+                return this.options.find(option => option === this.modelValue);
+            } else {
+                return this.title;
+            }
 
+        },
     },
-  },
 };
 </script>
 
 <style scoped>
 /* _dropdown.css */
 .dropdown {
+    --width-min: 120px;
     position: relative;
-    display: inline-block;
+    /*display: inline-block;*/
+    display: inline-flex;
+    flex-direction: row;
 }
 
 .dropdown__toggle {
-    display: inline-block;
+    /*display: inline-block;*/
+    display: inline-flex;
+    flex-direction: row;
     background-color: var(--white);
+    min-width: var(--width-min);
     background-position: calc(100% - 10px) calc(100% - 10px);
     border: 1px solid var(--blue-light);
     border-radius: 2px;
@@ -101,6 +107,9 @@ export default {
 }
 
 .dropdown_opened .dropdown__toggle {
+    min-width: var(--width-min);
+    display: flex;
+    flex-direction: row;
     border-color: var(--blue);
     border-bottom-color: transparent;
     border-bottom-left-radius: 0;
@@ -113,7 +122,7 @@ export default {
 
 .dropdown__menu {
     background-clip: padding-box;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 2px 2px;
     border: 1px solid var(--blue);
     border-top: none;
     bottom: auto;
@@ -121,7 +130,8 @@ export default {
     flex-direction: column;
     left: 0;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 0;
     position: absolute;
     right: auto;
@@ -130,6 +140,19 @@ export default {
     width: 100%;
     will-change: transform;
     z-index: 95;
+    max-height: 400px;
+    &::-webkit-scrollbar {
+        display: block;
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--grey);
+        border-radius: 2px;
+    }
+    &::-webkit-scrollbar-track-piece {
+        background: var(--white);
+    }
 }
 
 .dropdown__item {

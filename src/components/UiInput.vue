@@ -44,6 +44,7 @@ export default {
             class="input__input"
             :value="modelValue"
             v-bind="$attrs"
+            rows="3"
             @input="$emit('update:modelValue', ($event.target as HTMLInputElement | HTMLTextAreaElement ).value)"
             :placeholder="placeholder"
             pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
@@ -62,7 +63,7 @@ export default {
         max-width: 300px;
         background: var(--green-light);
         color: var(--grey-8);
-
+        resize: none;
         &::placeholder {
             color: var(--blue-light);
             font-size: .9em;

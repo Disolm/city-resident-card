@@ -16,14 +16,14 @@
 
 <style lang="scss" scoped>
 .citizen-line-info {
-    height: 22px;
+    height: 24px;
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 
     &__title {
         margin-right: 2px;

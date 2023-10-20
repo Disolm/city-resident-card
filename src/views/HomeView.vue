@@ -3,18 +3,23 @@ import TheCitizenList from "@/components/TheCitizenList.vue";
 import UiAlert from "@/components/UiAlert.vue";
 import {useCitizensStore} from "@/stores/citizens";
 import {useCitiesStore} from "@/stores/city";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import type {Ref} from 'vue'
 import type {TypeCitizens, TypeCities} from '@/types'
 
 const storeCitizens = useCitizensStore();
 const storeCities = useCitiesStore();
 const loading: Ref<boolean> = ref(true);
-(async () => {
+onMounted(async () => {
     await storeCitizens.fetchCitizens()
     await storeCities.fetchCities()
     loading.value = false
-})()
+})
+// (async () => {
+//     await storeCitizens.fetchCitizens()
+//     await storeCities.fetchCities()
+//     loading.value = false
+// })()
 const citizens = computed<TypeCitizens>(() => {
     return storeCitizens.getCitizens
 })

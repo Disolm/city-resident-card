@@ -14,5 +14,6 @@
   --red-light: #e8656f;
   --green: #24a37e;
   --green-light: #dff2ec;
+  --black: #000000;
   --default-cover: url('@/assets/images/not-found.png');
 }
