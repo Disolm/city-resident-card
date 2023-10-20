@@ -1,15 +1,13 @@
 <template>
     <div class="citizens-list">
-        <template v-if="citizens">
-            <UiTransitionGroupFade>
-                <TheCitizenItem
-                    v-for="citizen in citizens"
-                    :key="citizen.id"
-                    :citizen="citizen"
-                    :cities="cities"
-                />
-            </UiTransitionGroupFade>
-        </template>
+        <UiTransitionGroupFade v-if="citizens">
+            <TheCitizenItem
+                v-for="citizen in citizens"
+                :key="citizen.id"
+                :citizen="citizen"
+                :cities="cities"
+            />
+        </UiTransitionGroupFade>
     </div>
 </template>
 
