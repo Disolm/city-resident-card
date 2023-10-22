@@ -3,12 +3,14 @@ import UiButton from "@/components/UiButton.vue";
 
 interface IProps {
     isOpenModal: boolean
+    variant: string,
+    titleButton?: string
 }
 
 const emit = defineEmits(['closeModal'])
 const props = defineProps<IProps>()
-const closeModal = (): void => {
-    emit('closeModal')
+const closeModal = (target: string): void => {
+    emit('closeModal', target)
 }
 </script>
 <template>
@@ -19,17 +21,18 @@ const closeModal = (): void => {
         >
             <div
                 class="modal__overlay"
-                v-click-outside="closeModal"
             >
                 <div
                     class="modal__window"
+                    v-click-outside="() => {closeModal('overLay')}"
                 >
                     <slot/>
                     <UiButton
                         class="modal__button"
-                        @click="closeModal"
+                        @click="closeModal('click')"
+                        :variant="variant"
                     >
-                        Отмена
+                        {{ titleButton ? titleButton : "Отмена" }}
                     </UiButton>
                 </div>
             </div>

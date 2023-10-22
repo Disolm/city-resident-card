@@ -45,7 +45,7 @@ import UiDropdown from "@/components/UiDropdown.vue";
 import UiInput from "@/components/UiInput.vue";
 import CitizenLineInfo from "@/components/CitizenLineInfo.vue";
 import type {ICitizen, TypeCities} from "@/types";
-import {ref, onMounted} from "vue";
+import {ref, onMounted, watch} from "vue";
 import type {Ref} from "vue";
 import {klona} from "klona";
 import {formatPhoneNumber} from "@/composables/formatPhoneNumber";
@@ -56,13 +56,20 @@ interface IProps {
     citizen: ICitizen
     openWithModal?: boolean
 }
-const emit = defineEmits(['localCitizen'])
+const emit = defineEmits(['localCitizenChang'])
 
 const props = defineProps<IProps>()
 const localCitizen: Ref<ICitizen> = ref(klona(props.citizen));
-onMounted (() => {
-    emit('localCitizen', localCitizen.value)
+watch(() => props.clickOnEdit, () => {
+    if (props.clickOnEdit) {
+        localCitizen.value = klona(props.citizen)
+    }
 })
+watch(() => localCitizen.value, ()=> {
+    emit('localCitizenChang', localCitizen.value)
+},
+    { deep: true }
+)
 const filterOnInput = (key): boolean => {
     if (props.openWithModal) return true
     return ['additional'].some(item => item !== key)

@@ -6,7 +6,7 @@
     "cityId": 1,
     "address": "Дружбы ул., д. 22 кв.4",
     "mobilePhone": "+7 923-680-7635",
-    "photo": "Rick_Sanchez.jpeg",
+    "photo": "./src/api/picture/Rick_Sanchez.jpeg",
     "additional": "Финансист",
     "gender": "Male",
     "isActive": true
@@ -18,7 +18,7 @@
     "cityId": 1,
     "address": "Дружбы ул., д. 22 кв.4",
     "mobilePhone": "+7 967-638-5455",
-    "photo": "Morty_Smith.jpeg",
+    "photo": "./src/api/picture/Morty_Smith.jpeg",
     "additional": "Эксперт-криминалист",
     "gender": "Male",
     "isActive": true
@@ -30,7 +30,7 @@
     "cityId": 1,
     "address": "Минская ул., д. 25 кв.52",
     "mobilePhone": "+7 910-487-1070",
-    "photo": "Summer_Smith.jpeg",
+    "photo": "./src/api/picture/Summer_Smith.jpeg",
     "additional": "Распиловщик",
     "gender": "Female",
     "isActive": true
@@ -42,7 +42,7 @@
     "cityId": 1,
     "address": "Минская ул., д. 25 кв.52",
     "mobilePhone": "+7 948-368-2572",
-    "photo": "Beth_Smith.jpeg",
+    "photo": "./src/api/picture/Beth_Smith.jpeg",
     "additional": "Оперативный работник",
     "gender": "Female",
     "isActive": true
@@ -54,7 +54,7 @@
     "cityId": 1,
     "address": "Минская ул., д. 25 кв.52",
     "mobilePhone": "+7 935-318-6399",
-    "photo": "Jerry_Smith.jpeg",
+    "photo": "./src/api/picture/Jerry_Smith.jpeg",
     "additional": "Военнослужащий",
     "gender": "Male",
     "isActive": true
@@ -66,7 +66,7 @@
     "cityId": 2,
     "address": "Полевая ул., д. 13 кв.108",
     "mobilePhone": "+7 916-424-8194",
-    "photo": "Abadango_Cluster_Princess.jpeg",
+    "photo": "./src/api/picture/Abadango_Cluster_Princess.jpeg",
     "additional": "Государственный исполнитель",
     "gender": "Female",
     "isActive": true
@@ -78,7 +78,7 @@
     "cityId": 2,
     "address": "",
     "mobilePhone": "+7 983-330-7115",
-    "photo": "Abradolf_Lincler.jpeg",
+    "photo": "./src/api/picture/Abradolf_Lincler.jpeg",
     "additional": "",
     "gender": "Male",
     "isActive": true
@@ -90,7 +90,7 @@
     "cityId": 3,
     "address": "Приозерная ул., д. 25 кв.17",
     "mobilePhone": "+7 972-571-3245",
-    "photo": "Adjudicator_Rick.jpeg",
+    "photo": "./src/api/picture/Adjudicator_Rick.jpeg",
     "additional": "Экспедитор на дальних поездках",
     "gender": "Female",
     "isActive": false
@@ -102,7 +102,7 @@
     "cityId": 4,
     "address": "Космонавтов ул., д. 1 кв.219",
     "mobilePhone": "+7 930-692-1234",
-    "photo": "Agency_Director.jpeg",
+    "photo": "./src/api/picture/Agency_Director.jpeg",
     "additional": "Работник органов ЗАГСа",
     "gender": "Male",
     "isActive": false
@@ -114,7 +114,7 @@
     "cityId": 5,
     "address": "Центральная ул., д. 16 кв.65",
     "mobilePhone": "+7 985-438-4640",
-    "photo": "Alan_Rails.jpeg",
+    "photo": "./src/api/picture/Alan_Rails.jpeg",
     "additional": "Териолог",
     "gender": "Male",
     "isActive": false
@@ -126,7 +126,7 @@
     "cityId": 6,
     "address": "Дружбы ул., д. 1 кв.171",
     "mobilePhone": "+7 955-298-9951",
-    "photo": "Albert_Einstein.jpeg",
+    "photo": "./src/api/picture/Albert_Einstein.jpeg",
     "additional": "Кредитный консультант",
     "gender": "Male",
     "isActive": false
@@ -138,7 +138,7 @@
     "cityId": 7,
     "address": "Полевая ул., д. 10 кв.159",
     "mobilePhone": "+7 929-736-8330",
-    "photo": "Alexander.jpeg",
+    "photo": "./src/api/picture/Alexander.jpeg",
     "additional": "Юрист",
     "gender": "Male",
     "isActive": false
@@ -150,7 +150,7 @@
     "cityId": 8,
     "address": "",
     "mobilePhone": "+7 968-694-2823",
-    "photo": "Alien_Googah.jpeg",
+    "photo": "./src/api/picture/Alien_Googah.jpeg",
     "additional": "Военнослужащий",
     "gender": "Male",
     "isActive": false
@@ -162,7 +162,7 @@
     "cityId": 8,
     "address": "Победы ул., д. 3 кв.210",
     "mobilePhone": "+7 956-124-2111",
-    "photo": "Alien_Morty.jpeg",
+    "photo": "./src/api/picture/Alien_Morty.jpeg",
     "additional": "Кондуктор",
     "gender": "Male",
     "isActive": false
@@ -174,7 +174,7 @@
     "cityId": 1,
     "address": "Озерный пер., д. 7 кв.129",
     "mobilePhone": "+7 933-290-2328",
-    "photo": "Alien_Rick.jpeg",
+    "photo": "./src/api/picture/Alien_Rick.jpeg",
     "additional": "Бухгалтер",
     "gender": "Male",
     "isActive": false
@@ -186,7 +186,7 @@
     "cityId": 9,
     "address": "Приозерная ул., д. 14 кв.36",
     "mobilePhone": "+7 948-821-2411",
-    "photo": "Amish_Cyborg.jpeg",
+    "photo": "./src/api/picture/Amish_Cyborg.jpeg",
     "additional": "Декан",
     "gender": "Male",
     "isActive": false
@@ -198,7 +198,7 @@
     "cityId":10,
     "address": "Березовая ул., д. 7 кв.184",
     "mobilePhone": "+7 966-827-4085",
-    "photo": "Annie.jpeg",
+    "photo": "./src/api/picture/Annie.jpeg",
     "additional": "Токарь",
     "gender": "Female",
     "isActive": true
@@ -210,7 +210,7 @@
     "cityId": 1,
     "address": "Колхозная ул., д. 22 кв.173",
     "mobilePhone": "+7 963-555-9672",
-    "photo": "Antenna_Morty.jpeg",
+    "photo": "./src/api/picture/Antenna_Morty.jpeg",
     "additional": "",
     "gender": "Male",
     "isActive": true
@@ -222,7 +222,7 @@
     "cityId": 11,
     "address": "Лесная ул., д. 10 кв.67",
     "mobilePhone": "+7 984-616-9045",
-    "photo": "Ants_in_my_Eyes_Johnson.jpeg",
+    "photo": "./src/api/picture/Ants_in_my_Eyes_Johnson.jpeg",
     "additional": "Web-программист",
     "gender": "Male",
     "isActive": false
@@ -234,7 +234,7 @@
     "cityId": 21,
     "address": "Сосновая ул., д. 16 кв.165",
     "mobilePhone": "+7 911-741-4647",
-    "photo": "Aqua_Morty.jpeg",
+    "photo": "./src/api/picture/Aqua_Morty.jpeg",
     "additional": "Полицейский",
     "gender": "Male",
     "isActive": false

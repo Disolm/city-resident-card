@@ -8,10 +8,10 @@ export const clickOutside = {
                 binding.value();
             }
         };
-        document.addEventListener("mousedown", el.clickOutsideEvent);
+        document.addEventListener("mouseup", el.clickOutsideEvent);
     },
     beforeUnmount(el: any){
-        document.removeEventListener("mousedown", el.clickOutsideEvent);
+        document.removeEventListener("mouseup", el.clickOutsideEvent);
     }
 
 }

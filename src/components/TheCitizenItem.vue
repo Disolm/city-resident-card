@@ -5,9 +5,11 @@
         @mouseleave="[citizenEditedCursor = false, clickOnDelete = false]"
         :ref="'citizen-item'+ citizen.id"
         v-clickOutside="() => clickOnEdit = false"
-        @dblclick="isOpenModal=true"
+        @dblclick="isOpenModalEdit = true"
     >
-        <div class="citizens-item__photo"/>
+        <div class="citizens-item__photo"
+             :style="props.citizen.photo && {'--bg-url': 'url(' + photo + ')'}"
+        />
         <div
             class="citizens-item__info-list"
         >
@@ -15,7 +17,7 @@
                 :clickOnEdit="clickOnEdit"
                 :cities="cities"
                 :citizen="citizen"
-                @localCitizen="localCitizen = $event"
+                @localCitizenChang="localCitizen = $event"
             />
         </div>
         <UiTransitionGroupFade class="citizens-item__icons">
@@ -25,40 +27,54 @@
                     key="EditCitizenIcon"
                     @mouseup="clickOnEdit = true"
                     @cancellationEdit="clickOnEdit = false"
-                    @save-changes="saveChanges"
+                    @save-changes="saveChanges()"
                     v-if="!clickOnDelete"
                 />
                 <DeleteCitizenIcon
                     class="citizens-item__icon"
                     key="DeleteCitizenIcon"
                     v-if="!clickOnEdit"
-                    @mouseup="clickOnDelete = true"
+                    @mouseup="() => {clickOnDelete = true}"
                     @cancellationDelete="clickOnDelete = false"
                     :citizen="props.citizen"
                 />
             </template>
         </UiTransitionGroupFade>
         <UiModalWindow
-            @closeModal="isOpenModal = false"
-            :isOpenModal="isOpenModal"
+            variant="secondary"
+            @closeModal="closeModalWindow($event,'modalEdit')"
+            :is-open-modal="isOpenModalEdit"
         >
             <div
                 class="citizens-item__modal-window"
             >
+                <UiImageUploader
+                    :preview="photo"
+                    @select="handleSelect"
+                />
                 <CitizenLineInfoForm
                     :clickOnEdit="true"
                     :cities="cities"
                     :citizen="citizen"
                     :openWithModal=true
-                    @localCitizen="localCitizen = $event"
+                    @localCitizenChang="localCitizen = $event"
                 />
                 <UiButton
+                    variant="secondary"
                     class="citizens-item__button"
-                    @click="[saveChanges(), isOpenModal = false]"
+                    @click="[saveChanges(), isOpenModalEdit = false]"
                 >
                     Сохранить
                 </UiButton>
             </div>
+        </UiModalWindow>
+        <UiModalWindow
+            :is-open-modal="isOpenModalWarning"
+            @closeModal="closeModalWindow($event,'modalWarning')"
+            variant="danger"
+            titleButton="Закрыть"
+        >
+            <div>"Данные были изменены, сохраните или отмените изменения"</div>
         </UiModalWindow>
     </div>
 </template>
@@ -75,6 +91,7 @@ import {useCitizensStore} from "@/stores/citizens";
 import UiModalWindow from "@/components/UiModalWindow.vue";
 import CitizenLineInfoForm from "@/components/CitizenLineInfoForm.vue";
 import UiButton from "@/components/UiButton.vue";
+import UiImageUploader from "@/components/UiImageUploader.vue";
 
 interface IProps {
     citizen: ICitizen
@@ -82,11 +99,12 @@ interface IProps {
 }
 
 const props = defineProps<IProps>()
-const photo = computed<string>(() => 'url(./src/api/picture/' + props.citizen.photo + ')')
+const photo = computed<string>(() => props.citizen.photo)
 const citizenEditedCursor: Ref<boolean> = ref(false)
 const clickOnDelete: Ref<boolean> = ref(false)
 const clickOnEdit: Ref<boolean> = ref(false)
-const isOpenModal: Ref<boolean> = ref(false)
+const isOpenModalEdit: Ref<boolean> = ref(false)
+const isOpenModalWarning: Ref<boolean> = ref(false)
 const localCitizen: Ref<ICitizen | null> = ref(null)
 
 
@@ -96,6 +114,32 @@ const saveChanges = (): void => {
     let replaceCitizenIndex: number = citizens.findIndex(citizen => citizen.id === localCitizen.value?.id)
     citizens[replaceCitizenIndex] = klona(localCitizen.value) as ICitizen
     clickOnEdit.value = false
+}
+const closeModalWindow = (target: string, toCloseWhat: string): void => {
+    if (target === 'click') {
+        if (toCloseWhat === 'modalEdit') isOpenModalEdit.value = false
+        if (toCloseWhat === 'modalWarning') isOpenModalWarning.value = false
+    }
+    if (target === 'overLay') {
+        if (toCloseWhat === 'modalWarning') isOpenModalWarning.value = false
+        if (toCloseWhat === 'modalEdit') {
+            const citizenSting: string = JSON.stringify(props.citizen)
+            const LocalCitizenSting: string = JSON.stringify(localCitizen.value)
+            if (citizenSting !== LocalCitizenSting) {
+                isOpenModalWarning.value = true
+            } else {
+                isOpenModalEdit.value = false
+            }
+        }
+    }
+}
+const handleSelect = (urlImg) => {
+    if (!localCitizen.value?.photo) {
+        localCitizen.value = klona(props.citizen)
+    }
+    if ("photo" in localCitizen.value) {
+        localCitizen.value.photo = urlImg
+    }
 }
 </script>
 
@@ -120,7 +164,8 @@ const saveChanges = (): void => {
     &__photo {
         grid-area: 1 / 1 / 2 / 2;
         height: 100%;
-        background-image: v-bind(photo);
+        --bg-url: var(--default-cover);
+        background-image: var(--bg-url);
         background-position: center;
         background-repeat: no-repeat;
         background-size: auto 100%;
