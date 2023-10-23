@@ -9,7 +9,7 @@
             <UiDropdown
                 :title="optionsForSelected[0]"
                 :options="optionsForSelected"
-                v-model="searchLocation"
+                v-model="searchLocationTitle"
             />
         </div>
 
@@ -25,7 +25,7 @@ import UiInput from "@/components/UiInput.vue";
 import {titleKey} from '@/composables/titleKeyCitizen'
 import UiDropdown from "@/components/UiDropdown.vue";
 const searchValue:Ref<string> = ref('')
-const searchLocation:Ref<string> = ref('')
+const searchLocationTitle:Ref<string> = ref(titleKey['name'].title)
 interface IProps {
     citizens: TypeCitizens | null | undefined
 }
@@ -38,16 +38,26 @@ const resultSearch = (): TypeCitizens | null | undefined => {
     const regexp: RegExp = new RegExp(searchStrShielding, flag)
     return props.citizens ? props.citizens.filter((item: ICitizen) => {
         regexp.lastIndex = 0
-        return regexp.test(item[searchLocation.value])
+        const value:string = searchLocationKey.value === 'mobilePhone' ? item[searchLocationKey.value].replace(/\D+/g, '') : item[searchLocationKey.value]
+
+        return regexp.test(value)
     }) : props.citizens
 }
 watch(() => searchValue.value, ()=> {
     emit('resultSearchAndSoring', resultSearch())
 })
 const optionsForSelected = computed<string[]>(()=>{
-    return Object.values(titleKey).map(item => {
+    return Object.values(titleKey).filter(item => {
+        return !item.select && item.title !== 'Дата рождения'
+    }).map(item => {
         return item.title
     })
+})
+const searchLocationKey = computed<string>(() => {
+    const result:[string, any] | undefined = Object.entries(titleKey).find(item => {
+        return item[1].title === searchLocationTitle.value
+    })
+    return result[0] || 'name'
 })
 </script>
 
