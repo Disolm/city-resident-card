@@ -2,7 +2,7 @@ export interface ICitizen {
     "name": string,
     "id": number,
     "birthday": string,
-    "city": number,
+    "cityId": number,
     "address": string,
     "mobilePhone": string,
     "photo": string,

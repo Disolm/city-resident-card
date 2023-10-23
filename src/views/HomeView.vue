@@ -30,6 +30,7 @@ const citizensChange: Ref<TypeCitizens | null> = ref(null)
     <main class="home-view">
         <SortingAndFilterCitizen
             :citizens="citizens"
+            :cities="cities"
             @resultSearchAndSoring="citizensChange = $event"
         />
         <UiContainer>
