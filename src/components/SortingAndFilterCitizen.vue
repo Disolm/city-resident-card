@@ -13,9 +13,9 @@
             />
         </div>
         <div class="sorting-filter-citizen__filter">
-            <div class="sorting-filter-citizen__filter-title">Фильтры: </div>
+            <div class="sorting-filter-citizen__filter-title">Фильтры:</div>
             <div class="sorting-filter-citizen__filter-gender">
-                <span>{{dropdownTitle('gender')}}</span>
+                <span>{{ dropdownTitle('gender') }}</span>
                 <UiDropdown
                     :title="optionsForSelectedFilterGender[0].value"
                     :options="optionsForSelectedFilterGender.map(item => item.value)"
@@ -37,54 +37,68 @@ import UiInput from "@/components/UiInput.vue";
 import {titleKey} from '@/composables/titleKeyCitizen'
 import UiDropdown from "@/components/UiDropdown.vue";
 import {klona} from "klona";
-const searchValue:Ref<string> = ref('')
-const searchLocationTitle:Ref<string> = ref(titleKey['name'].title)
-const valueGender:Ref<string> = ref('Все')
+
+const searchValue: Ref<string> = ref('')
+const searchLocationTitle: Ref<string> = ref(titleKey['name'].title)
+const valueGender: Ref<string> = ref('Все')
+
 interface IProps {
-    citizens: TypeCitizens | null | undefined
+    citizens: TypeCitizensFull
 }
+
+type TypeCitizensFull = TypeCitizens | null | undefined
 const props = defineProps<IProps>()
 const emit = defineEmits(['resultSearchAndSoring'])
-const localCitizens = computed<TypeCitizens | null | undefined>(() => klona(props.citizens))
+const localCitizens = computed<TypeCitizensFull>(() => klona(props.citizens))
 
-const resultSearch = (): TypeCitizens | null | undefined => {
+const resultSearch = (): TypeCitizensFull => {
     const flag: string = 'gi'
     const searchStrShielding: string = searchValue.value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
     const regexp: RegExp = new RegExp(searchStrShielding, flag)
     return localCitizens.value!.filter((item: ICitizen) => {
         regexp.lastIndex = 0
-        const value:string = searchLocationKey.value === 'mobilePhone' ? item[searchLocationKey.value].replace(/\D+/g, '') : item[searchLocationKey.value]
+        const value: string = searchLocationKey.value === 'mobilePhone' ? item[searchLocationKey.value].replace(/\D+/g, '') : item[searchLocationKey.value]
 
         return regexp.test(value)
     })
 }
-watch(() => searchValue.value, ()=> {
-    emit('resultSearchAndSoring', resultSearch())
-})
-watch(() => JSON.stringify(props.citizens), ()=> {
-    emit('resultSearchAndSoring', resultSearch())
-    //можно следить через deep, но так расходуется меньше ресурсов
-})
-watch(()=> valueGender.value, ()=> {
+const allFilterStart = (): TypeCitizensFull => {
+    const arr = resultSearch()
+    return genderFilter(arr)
+}
+const genderFilter = (arrayFilter:TypeCitizensFull ): TypeCitizensFull => {
     const valueSearch = optionsForSelectedFilterGender.value.find(item => {
         return item.value === valueGender.value
     })
-    const resultSearchByGender: TypeCitizens = localCitizens.value!.filter((item: ICitizen) => {
+    return arrayFilter!.filter((item: ICitizen) => {
         return !valueSearch.key || item.gender === valueSearch.key
     })
-    emit('resultSearchAndSoring', resultSearchByGender)
+}
+watch(() => searchValue.value, () => {
+    emit('resultSearchAndSoring', allFilterStart())
 })
-const dropdownTitle = (key):string => {
+watch(() => JSON.stringify(props.citizens), () => {
+
+    emit('resultSearchAndSoring', allFilterStart())
+    //можно следить через deep, но так расходуется меньше ресурсов
+})
+watch(() => valueGender.value, () => {
+
+    emit('resultSearchAndSoring', allFilterStart())
+})
+const dropdownTitle = (key): string => {
     const index = Object.keys(titleKey).findIndex(item => item === key)
     return Object.values(titleKey)[index].title
 }
+
 interface IOptionForGender {
     key: string
     value: string
 }
-const optionsForSelectedFilterGender = computed<IOptionForGender[]>(()=>{
+
+const optionsForSelectedFilterGender = computed<IOptionForGender[]>(() => {
     const key = 'gender'
-    const index:number = Object.keys(titleKey).findIndex(item => item === key)
+    const index: number = Object.keys(titleKey).findIndex(item => item === key)
     const objValue: {} = Object.values(titleKey)[index].value
     const allItemsTitle: string = 'Все'
     const arrayKeys: string[] = Object.keys(objValue)
@@ -95,7 +109,7 @@ const optionsForSelectedFilterGender = computed<IOptionForGender[]>(()=>{
         return {key: arrayKeys[idx], value: arrayValue[idx]}
     })
 })
-const optionsForSelectedSearch = computed<string[]>(()=>{
+const optionsForSelectedSearch = computed<string[]>(() => {
     return Object.values(titleKey).filter(item => {
         return !item.select && item.title !== 'Дата рождения'
     }).map(item => {
@@ -103,7 +117,7 @@ const optionsForSelectedSearch = computed<string[]>(()=>{
     })
 })
 const searchLocationKey = computed<string>(() => {
-    const result:[string, any] | undefined = Object.entries(titleKey).find(item => {
+    const result: [string, any] | undefined = Object.entries(titleKey).find(item => {
         return item[1].title === searchLocationTitle.value
     })
     return result[0] || 'name'
@@ -123,6 +137,7 @@ const searchLocationKey = computed<string>(() => {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
     &__search, &__filter {
         display: inline-flex;
         flex-direction: row;
@@ -131,6 +146,7 @@ const searchLocationKey = computed<string>(() => {
         border-radius: 6px;
         padding: 6px;
         margin: 6px;
+
         & div {
             margin: 0 6px;
         }
