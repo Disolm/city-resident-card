@@ -40,6 +40,11 @@ export default {
         modelValue: {
             type: String,
         },
+        title: {
+            required: false,
+            type: String,
+            defaults: ''
+        },
     },
     emits: ['update:modelValue'],
     data() {
@@ -141,6 +146,7 @@ export default {
     will-change: transform;
     z-index: 95;
     max-height: 400px;
+
     &::-webkit-scrollbar {
         display: block;
         width: 6px;
@@ -150,6 +156,7 @@ export default {
         background: var(--grey);
         border-radius: 2px;
     }
+
     &::-webkit-scrollbar-track-piece {
         background: var(--white);
     }

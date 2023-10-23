@@ -47,7 +47,6 @@ export default {
             rows="3"
             @input="$emit('update:modelValue', ($event.target as HTMLInputElement | HTMLTextAreaElement ).value)"
             :placeholder="placeholder"
-            pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
         />
     </div>
 </template>
@@ -55,7 +54,7 @@ export default {
 <style scoped lang="scss">
 
 .input {
-    width: 100%;
+    //width: 100%;
 
     &__input {
         width: 100%;

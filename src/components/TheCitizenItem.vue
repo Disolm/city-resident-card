@@ -124,11 +124,12 @@ const closeModalWindow = (target: string, toCloseWhat: string): void => {
         if (toCloseWhat === 'modalWarning') isOpenModalWarning.value = false
         if (toCloseWhat === 'modalEdit') {
             const citizenSting: string = JSON.stringify(props.citizen)
-            const LocalCitizenSting: string = JSON.stringify(localCitizen.value)
-            if (citizenSting !== LocalCitizenSting) {
-                isOpenModalWarning.value = true
-            } else {
+            const localCitizenSting: string = JSON.stringify(localCitizen.value)
+            if (citizenSting === localCitizenSting || !localCitizen.value) {
                 isOpenModalEdit.value = false
+            } else {
+                isOpenModalWarning.value = true
+
             }
         }
     }

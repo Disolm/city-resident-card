@@ -29,7 +29,7 @@
                     v-else
                     :multiline="item.type === 'multiline'"
                     :type="item.type"
-                    :placeholder="item.placeholder"
+                    :placeholder="item.placeholder || ''"
                     :modelValue="citizenFormatted(key, localCitizen)"
                     @update:modelValue="changeInput(key, $event)"
                 />
@@ -45,7 +45,7 @@ import UiDropdown from "@/components/UiDropdown.vue";
 import UiInput from "@/components/UiInput.vue";
 import CitizenLineInfo from "@/components/CitizenLineInfo.vue";
 import type {ICitizen, TypeCities} from "@/types";
-import {ref, onMounted, watch} from "vue";
+import {ref, watch} from "vue";
 import type {Ref} from "vue";
 import {klona} from "klona";
 import {formatPhoneNumber} from "@/composables/formatPhoneNumber";

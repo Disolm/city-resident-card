@@ -1,6 +1,9 @@
 <template>
     <div class="citizens-list">
-        <UiTransitionGroupFade v-if="citizens">
+        <UiTransitionGroupFade
+            v-if="citizens"
+            class="citizens-list__transition-group"
+        >
             <TheCitizenItem
                 v-for="citizen in citizens"
                 :key="citizen.id"
@@ -29,5 +32,11 @@ const props = defineProps<IProps>()
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    &__transition-group{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 </style>

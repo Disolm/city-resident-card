@@ -6,6 +6,8 @@ import {useCitiesStore} from "@/stores/city";
 import {computed, onMounted, ref} from "vue";
 import type {Ref} from 'vue'
 import type {TypeCitizens, TypeCities} from '@/types'
+import UiContainer from "@/components/UiContainer.vue";
+import SortingAndFilterCitizen from "@/components/SortingAndFilterCitizen.vue";
 
 const storeCitizens = useCitizensStore();
 const storeCities = useCitiesStore();
@@ -15,27 +17,29 @@ onMounted(async () => {
     await storeCities.fetchCities()
     loading.value = false
 })
-// (async () => {
-//     await storeCitizens.fetchCitizens()
-//     await storeCities.fetchCities()
-//     loading.value = false
-// })()
 const citizens = computed<TypeCitizens>(() => {
     return storeCitizens.getCitizens
 })
 const cities = computed<TypeCities>(() => {
     return storeCities.getCities
 })
+const citizensChange: Ref<TypeCitizens | null> = ref(null)
 </script>
 
 <template>
     <main class="home-view">
-        <UiAlert v-if="loading">Загрузка</UiAlert>
-        <UiAlert v-if="!loading && !citizens"/>
-        <TheCitizenList
+        <SortingAndFilterCitizen
             :citizens="citizens"
-            :cities="cities"
+            @resultSearchAndSoring="citizensChange = $event"
         />
+        <UiContainer>
+            <UiAlert v-if="loading">Загрузка</UiAlert>
+            <UiAlert v-if="!loading && !citizens"/>
+            <TheCitizenList
+                :citizens="citizensChange || citizens"
+                :cities="cities"
+            />
+        </UiContainer>
     </main>
 </template>
 <style scoped lang="scss">
