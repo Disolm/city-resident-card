@@ -46,6 +46,10 @@ const resultSearch = (): TypeCitizens | null | undefined => {
 watch(() => searchValue.value, ()=> {
     emit('resultSearchAndSoring', resultSearch())
 })
+watch(() => JSON.stringify(props.citizens), ()=> {
+    emit('resultSearchAndSoring', resultSearch())
+    //можно следить через deep, но так расходуется меньше ресурсов
+})
 const optionsForSelected = computed<string[]>(()=>{
     return Object.values(titleKey).filter(item => {
         return !item.select && item.title !== 'Дата рождения'
