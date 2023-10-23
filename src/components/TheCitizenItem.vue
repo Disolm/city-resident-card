@@ -2,9 +2,9 @@
     <div
         class="citizens-item"
         @mouseover="citizenEditedCursor = true"
-        @mouseleave="[citizenEditedCursor = false, clickOnDelete = false]"
+        @mouseleave="mouseleaveMainDiv"
         :ref="'citizen-item'+ citizen.id"
-        v-clickOutside="() => clickOnEdit = false"
+        v-clickOutside="() => {clickOnEdit = false; citizenEditedCursor = false}"
         @dblclick="isOpenModalEdit = true"
     >
         <div class="citizens-item__photo"
@@ -107,7 +107,10 @@ const isOpenModalEdit: Ref<boolean> = ref(false)
 const isOpenModalWarning: Ref<boolean> = ref(false)
 const localCitizen: Ref<ICitizen | null> = ref(null)
 
-
+const mouseleaveMainDiv = ():void => {
+    if (!clickOnEdit.value) citizenEditedCursor.value = false
+    clickOnDelete.value = false
+}
 const saveChanges = (): void => {
     const storeCitizens = useCitizensStore();
     const citizens: TypeCitizens = storeCitizens.getCitizens
