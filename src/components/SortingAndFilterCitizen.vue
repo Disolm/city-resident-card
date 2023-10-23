@@ -7,10 +7,22 @@
             />
             <div class="sorting-filter-citizen__search-descriptions">по</div>
             <UiDropdown
-                :title="optionsForSelected[0]"
-                :options="optionsForSelected"
+                :title="optionsForSelectedSearch[0]"
+                :options="optionsForSelectedSearch"
                 v-model="searchLocationTitle"
             />
+        </div>
+        <div class="sorting-filter-citizen__filter">
+            <div class="sorting-filter-citizen__filter-title">Фильтры: </div>
+            <div class="sorting-filter-citizen__filter-gender">
+                <span>{{dropdownTitle('gender')}}</span>
+                <UiDropdown
+                    :title="optionsForSelectedFilterGender[0].value"
+                    :options="optionsForSelectedFilterGender.map(item => item.value)"
+                    v-model="valueGender"
+                />
+            </div>
+
         </div>
 
 
@@ -24,24 +36,27 @@ import {computed, ref, watch} from "vue";
 import UiInput from "@/components/UiInput.vue";
 import {titleKey} from '@/composables/titleKeyCitizen'
 import UiDropdown from "@/components/UiDropdown.vue";
+import {klona} from "klona";
 const searchValue:Ref<string> = ref('')
 const searchLocationTitle:Ref<string> = ref(titleKey['name'].title)
+const valueGender:Ref<string> = ref('Все')
 interface IProps {
     citizens: TypeCitizens | null | undefined
 }
-
 const props = defineProps<IProps>()
 const emit = defineEmits(['resultSearchAndSoring'])
+const localCitizens = computed<TypeCitizens | null | undefined>(() => klona(props.citizens))
+
 const resultSearch = (): TypeCitizens | null | undefined => {
     const flag: string = 'gi'
     const searchStrShielding: string = searchValue.value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&")
     const regexp: RegExp = new RegExp(searchStrShielding, flag)
-    return props.citizens ? props.citizens.filter((item: ICitizen) => {
+    return localCitizens.value!.filter((item: ICitizen) => {
         regexp.lastIndex = 0
         const value:string = searchLocationKey.value === 'mobilePhone' ? item[searchLocationKey.value].replace(/\D+/g, '') : item[searchLocationKey.value]
 
         return regexp.test(value)
-    }) : props.citizens
+    })
 }
 watch(() => searchValue.value, ()=> {
     emit('resultSearchAndSoring', resultSearch())
@@ -50,7 +65,37 @@ watch(() => JSON.stringify(props.citizens), ()=> {
     emit('resultSearchAndSoring', resultSearch())
     //можно следить через deep, но так расходуется меньше ресурсов
 })
-const optionsForSelected = computed<string[]>(()=>{
+watch(()=> valueGender.value, ()=> {
+    const valueSearch = optionsForSelectedFilterGender.value.find(item => {
+        return item.value === valueGender.value
+    })
+    const resultSearchByGender: TypeCitizens = localCitizens.value!.filter((item: ICitizen) => {
+        return !valueSearch.key || item.gender === valueSearch.key
+    })
+    emit('resultSearchAndSoring', resultSearchByGender)
+})
+const dropdownTitle = (key):string => {
+    const index = Object.keys(titleKey).findIndex(item => item === key)
+    return Object.values(titleKey)[index].title
+}
+interface IOptionForGender {
+    key: string
+    value: string
+}
+const optionsForSelectedFilterGender = computed<IOptionForGender[]>(()=>{
+    const key = 'gender'
+    const index:number = Object.keys(titleKey).findIndex(item => item === key)
+    const objValue: {} = Object.values(titleKey)[index].value
+    const allItemsTitle: string = 'Все'
+    const arrayKeys: string[] = Object.keys(objValue)
+    const arrayValue: string[] = Object.values(objValue)
+    arrayKeys.unshift('')
+    arrayValue.unshift(allItemsTitle)
+    return arrayKeys.map((item, idx) => {
+        return {key: arrayKeys[idx], value: arrayValue[idx]}
+    })
+})
+const optionsForSelectedSearch = computed<string[]>(()=>{
     return Object.values(titleKey).filter(item => {
         return !item.select && item.title !== 'Дата рождения'
     }).map(item => {
@@ -67,20 +112,25 @@ const searchLocationKey = computed<string>(() => {
 
 <style scoped lang="scss">
 .sorting-filter-citizen {
+    position: sticky;
+    top: -1px;
+    z-index: 10;
     background-color: var(--blue);
     width: 100%;
+    padding: 16px 0;
     min-height: 56px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    &__search {
+    &__search, &__filter {
         display: inline-flex;
         flex-direction: row;
         justify-content: flex-start;
         background-color: var(--blue-light);
         border-radius: 6px;
         padding: 6px;
+        margin: 6px;
         & div {
             margin: 0 6px;
         }
