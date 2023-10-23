@@ -7,7 +7,7 @@
             :key="key"
         >
             <template v-slot:title>
-                {{ item.title }}
+                <span>{{ item.title }}</span><span>:</span>
             </template>
             <template
                 v-slot:description
