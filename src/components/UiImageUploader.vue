@@ -22,9 +22,11 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 
-export default {
+import {defineComponent} from "vue";
+
+export default defineComponent({
     name: 'UiImageUploader',
     props: {
         preview: {
@@ -58,9 +60,9 @@ export default {
         },
     },
     methods: {
-        async previewFiles(event) {
-            if (!event.currentTarget.files.length) return;
-            let file = event.currentTarget.files[0];
+        async previewFiles(event: Event) {
+            if (!((event.currentTarget as HTMLInputElement).files as FileList).length) return;
+            let file: File = ((event.currentTarget as HTMLInputElement).files as FileList)[0];
             this.urlImg = URL.createObjectURL(file);
 
             this.$emit('select', this.urlImg);
@@ -68,10 +70,11 @@ export default {
 
             if (this.uploader) {
                 this.loading = true;
-                this.uploader(file).then((response) => {
+                this.uploader(file)
+                    .then((response: Response) => {
                     this.$emit('upload', response);
-                    this.urlImg = response.image;
-                }).catch((error) => {
+                    // this.urlImg = response.image;
+                }).catch((error: Error) => {
                         this.$emit('error', error);
                         this.urlImg = '';
                     },
@@ -79,14 +82,14 @@ export default {
                     this.loading = false;
                 });
             }
-            event.target.value = null;
+            (event.currentTarget as HTMLInputElement).value = '';
         },
         removeImg() {
             this.urlImg = '';
             this.$emit('remove');
         },
     },
-};
+});
 </script>
 
 <style scoped>

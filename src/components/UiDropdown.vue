@@ -28,9 +28,11 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 
-export default {
+import {defineComponent} from "vue";
+
+export default defineComponent({
     name: 'UiDropdown',
     props: {
         options: {
@@ -63,7 +65,7 @@ export default {
 
         },
     },
-};
+});
 </script>
 
 <style scoped>

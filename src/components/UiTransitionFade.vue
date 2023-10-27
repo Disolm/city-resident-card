@@ -4,10 +4,12 @@
   </Transition>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import {defineComponent} from "vue";
+
+export default defineComponent({
   name: 'UiTransitionFade',
-};
+});
 </script>
 
 <style scoped>

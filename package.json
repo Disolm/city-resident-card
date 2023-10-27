@@ -15,7 +15,8 @@
     "klona": "^2.0.6",
     "pinia": "^2.1.6",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.4",
+    "vue3-virtual-scroll-list": "^0.2.1"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",

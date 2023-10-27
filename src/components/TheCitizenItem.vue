@@ -10,9 +10,7 @@
         <div class="citizens-item__photo"
              :style="props.citizen.photo && {'--bg-url': 'url(' + photo + ')'}"
         />
-        <div
-            class="citizens-item__info-list"
-        >
+        <div class="citizens-item__info-list">
             <CitizenLineInfoForm
                 :clickOnEdit="clickOnEdit"
                 :cities="cities"
@@ -113,7 +111,8 @@ const mouseleaveMainDiv = ():void => {
 }
 const saveChanges = (): void => {
     const storeCitizens = useCitizensStore();
-    const citizens: TypeCitizens = storeCitizens.getCitizens
+    const citizens: TypeCitizens | null | undefined = storeCitizens.getCitizens
+    if (!citizens) return
     let replaceCitizenIndex: number = citizens.findIndex(citizen => citizen.id === localCitizen.value?.id)
     citizens[replaceCitizenIndex] = klona(localCitizen.value) as ICitizen
     clickOnEdit.value = false
@@ -137,7 +136,7 @@ const closeModalWindow = (target: string, toCloseWhat: string): void => {
         }
     }
 }
-const handleSelect = (urlImg) => {
+const handleSelect = (urlImg: string) => {
     if (!localCitizen.value?.photo) {
         localCitizen.value = klona(props.citizen)
     }

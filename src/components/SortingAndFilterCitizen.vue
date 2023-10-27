@@ -70,7 +70,7 @@ type TypeCitizensFull = TypeCitizens | null | undefined
 const props = defineProps<IProps>()
 const emit = defineEmits(['resultSearchAndSoring'])
 const localCitizens = computed<TypeCitizensFull>(() => klona(props.citizens))
-const dropdownTitle = (key): string => {
+const dropdownTitle = (key: string): string => {
     const index = Object.keys(titleKey).findIndex(item => item === key)
     return Object.values(titleKey)[index].title
 }
@@ -89,13 +89,13 @@ const searchLocationKey = computed<string>(() => {
     const result: [string, any] | undefined = Object.entries(titleKey).find(item => {
         return item[1].title === searchLocationTitle.value
     })
-    return result[0] || 'name'
+    return result?.[0] || 'name'
 })
 const allFilterStart = (): TypeCitizensFull => {
     const step1 = resultSearch()
     const step2 = genderFilter(step1)
     const step3 = isActiveFilter(step2)
-    return citiesFilter(step2)
+    return citiesFilter(step3)
 }
 const genderFilter = (arrayFilter: TypeCitizensFull): TypeCitizensFull => {
     const valueSearch = optionsForSelectedFilterGender.value.find(item => {

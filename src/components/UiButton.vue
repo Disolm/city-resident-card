@@ -1,6 +1,6 @@
 <template>
     <component
-        :is="tag"
+        :is="tag!"
         class="button"
         :class="[classForButton, {'button_block': block}]"
         :[type]="'button'"
@@ -9,9 +9,11 @@
     </component>
 </template>
 
-<script>
+<script lang="ts">
 
-export default {
+import {defineComponent} from 'vue';
+
+export default defineComponent({
     name: 'UiButton',
     props: {
         tag: {
@@ -32,14 +34,14 @@ export default {
         }
     },
     computed: {
-        classForButton() {
+        classForButton(): string {
             return `button_${this.variant}`
         },
-        type() {
+        type(): string | null {
             return this.tag === 'button' ? 'type' : null
         }
     }
-};
+});
 </script>
 
 <style scoped>

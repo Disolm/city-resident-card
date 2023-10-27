@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import {defineComponent} from "vue";
+
+export default defineComponent({
     name: 'UiAlert',
 
     props: {
@@ -14,7 +16,7 @@ export default {
             default: 'Error...',
         },
     },
-};
+});
 </script>
 
 <style scoped>

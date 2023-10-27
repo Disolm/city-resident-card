@@ -1,38 +1,40 @@
-<script lang="ts">
-export default {
+<script lang="ts" setup>
+import {computed, onMounted, ref} from "vue";
+import type {Ref} from "vue";
+defineOptions({
+    inheritAttrs: false
+})
+const emit = defineEmits(['update:modelValue'])
 
-    name: 'UiInput',
-    inheritAttrs: false,
-    props: {
-        modelValue: {
-            type: String,
-            required: false,
-        },
-        placeholder: {
-            type: String,
-            default: ''
-        },
-        multiline: {
-            type: Boolean,
-            required: false,
-            default: false
-        }
+const props = defineProps({
+    modelValue: {
+        type: String,
+        required: false,
     },
-    emits: ['update:modelValue'],
-    computed: {
-        tag() {
-            return this.multiline ? 'textarea' : 'input'
-        }
+    placeholder: {
+        type: String,
+        default: ''
     },
-    methods: {
-        focus() {
-            (this.$refs.input as HTMLInputElement | HTMLTextAreaElement).focus();
-        },
+    multiline: {
+        type: Boolean,
+        required: false,
+        default: false
     },
-    mounted() {
-        this.focus()
+    index: {
+        type: Number,
+        required: false
     }
-};
+})
+const tag = computed<string>(()=>{
+    return props.multiline ? 'textarea' : 'input'
+})
+const input: Ref<HTMLInputElement | HTMLTextAreaElement | null> = ref(null)
+const focus = ():void => {
+    input.value?.focus()
+}
+onMounted( () => {
+    focus()
+})
 </script>
 <template>
     <div

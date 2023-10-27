@@ -87,3 +87,6 @@ label {
 legend {
     display: block;
 }
+html {
+    height: 100%;
+}

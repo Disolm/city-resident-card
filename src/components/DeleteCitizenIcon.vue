@@ -40,6 +40,7 @@ const storeCitizens = useCitizensStore();
 
 const deleteLine = (): void => {
     const citizensArray = storeCitizens.getCitizens
+    if (!citizensArray) return
     const newArrayCitizens = citizensArray.filter(item => {
         return item.id !== props.citizen.id
     })

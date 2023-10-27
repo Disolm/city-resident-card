@@ -70,11 +70,12 @@ watch(() => localCitizen.value, ()=> {
 },
     { deep: true }
 )
-const filterOnInput = (key): boolean => {
+const filterOnInput = (key: string): boolean => {
     if (props.openWithModal) return true
     return ['additional'].some(item => item !== key)
 }
 const citizenFormatted = (key: string, citizen: ICitizen): string => {
+    if (!citizen) return ''
     if (key === 'isActive') {
         return titleKey[key].value(citizen[key])
     }
@@ -97,9 +98,9 @@ const optionsForSelected = (key: string): string[] => {
         return Object.values(titleKey[key].value)
     }
     if (key === 'cityId') {
-        return props.cities?.map(citi => citi.name)
+        return props.cities?.map(citi => citi.name) || ['']
     }
-    return []
+    return ['']
 }
 const changeOptions = (key: string, event: string): void => {
     if (key === 'isActive') {
@@ -109,7 +110,7 @@ const changeOptions = (key: string, event: string): void => {
         localCitizen.value[key] = <string>Object.entries(titleKey[key].value).find(arr => arr[1] === event)?.[0]
     }
     if (key === 'cityId' && props.cities) {
-        localCitizen.value[key] = props.cities?.find(citi => citi.name === event).id
+        localCitizen.value[key] = <number>props.cities!.find(citi => citi.name === event).id
     }
 }
 const changeInput = (key: string, event: string): void => {
