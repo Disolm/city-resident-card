@@ -31,7 +31,9 @@
 <script lang="ts">
 
 import {defineComponent} from "vue";
-
+interface State {
+    isOpen: boolean
+}
 export default defineComponent({
     name: 'UiDropdown',
     props: {
@@ -49,7 +51,7 @@ export default defineComponent({
         },
     },
     emits: ['update:modelValue'],
-    data() {
+    data():State {
         return {
             isOpen: false,
         };

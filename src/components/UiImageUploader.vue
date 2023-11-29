@@ -25,6 +25,10 @@
 <script lang="ts">
 
 import {defineComponent} from "vue";
+interface State {
+    loading: boolean,
+    urlImg: string | undefined
+}
 
 export default defineComponent({
     name: 'UiImageUploader',
@@ -40,20 +44,20 @@ export default defineComponent({
     },
     inheritAttrs: false,
     emits: ['select', 'upload', 'error', 'remove'],
-    data() {
+    data():State {
         return {
             loading: false,
             urlImg: this.preview,
         };
     },
     computed: {
-        eventnameinput() {
+        eventnameinput(): string | null {
             return this.urlImg ? null : 'change';
         },
-        eventnamelabel() {
+        eventnamelabel(): string | null {
             return this.urlImg && !this.loading ? 'click' : null;
         },
-        textInElement() {
+        textInElement(): string {
             if (this.loading) return 'Загрузка...';
             if (this.urlImg) return 'Удалить изображение';
             return 'Загрузить изображение';

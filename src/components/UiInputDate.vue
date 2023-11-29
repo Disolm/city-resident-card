@@ -13,8 +13,9 @@
 
 <script>
 import UiInput from '@/components/UiInput.vue';
+import {defineComponent} from 'vue';
 
-export default {
+export default defineComponent({
   name: 'UiInputDate',
   components: { UiInput },
   emits: ['update:modelValue'],
@@ -57,5 +58,5 @@ export default {
       },
     },
   },
-};
+});
 </script>

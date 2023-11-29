@@ -5,13 +5,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {PropType, defineComponent} from "vue";
 
 export default defineComponent({
     name: 'UiTransitionGroupFade',
     props: {
         tag: {
-            type: [String],
+            type: [String] as PropType<string>,
             default: 'div',
         },
     },
